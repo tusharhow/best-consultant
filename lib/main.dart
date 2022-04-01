@@ -1,11 +1,11 @@
+import 'package:best_consultant/views/auth/login.dart';
 import 'package:best_consultant/views/auth/sign_up.dart';
 import 'package:flutter/material.dart';
 
-import 'views/auth/login.dart';
-import 'views/home_page.dart';
+import 'services/paypal.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,6 +20,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: LoginPage());
+        home: SignUpPage());
   }
 }

@@ -73,6 +73,37 @@ class SignUpPage extends StatelessWidget {
                                     child: TextFormField(
                                       maxLines: 1,
                                       decoration: const InputDecoration(
+                                        label: Text("Name"),
+                                        border: InputBorder.none,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        FadeAnimation(
+                          2,
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 10),
+                            padding: const EdgeInsets.only(left: 10),
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFdedbed),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Icon(Icons.person_outline),
+                                Expanded(
+                                  child: Container(
+                                    margin: const EdgeInsets.only(left: 10),
+                                    child: TextFormField(
+                                      maxLines: 1,
+                                      decoration: const InputDecoration(
                                         label: Text("Email"),
                                         border: InputBorder.none,
                                       ),
