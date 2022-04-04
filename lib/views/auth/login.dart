@@ -1,4 +1,5 @@
 import 'package:best_consultant/controllers/autth_controller.dart';
+import 'package:best_consultant/views/auth/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 
@@ -151,20 +152,39 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Don't have an account?",
+                              style: TextStyle(
+                                color: Colors.black38,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignUpPage()),
+                                );
+                              },
+                              child: const Text(
+                                " Sign Up",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
                 )),
-            Container(
-              margin: const EdgeInsets.only(top: 30),
-              child: const Text(
-                "SignUp if don't have account ",
-                style: TextStyle(
-                  color: Colors.black12,
-                  letterSpacing: 2,
-                ),
-              ),
-            ),
           ],
         ),
       ),
