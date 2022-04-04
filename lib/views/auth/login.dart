@@ -1,11 +1,14 @@
+import 'package:best_consultant/controllers/autth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
+  LoginPage({Key? key}) : super(key: key);
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    AuthService authController = AuthService();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -70,6 +73,7 @@ class LoginPage extends StatelessWidget {
                                   child: Container(
                                     margin: const EdgeInsets.only(left: 10),
                                     child: TextFormField(
+                                      controller: emailController,
                                       maxLines: 1,
                                       decoration: const InputDecoration(
                                         label: Text("Email"),
@@ -101,6 +105,7 @@ class LoginPage extends StatelessWidget {
                                   child: Container(
                                     margin: const EdgeInsets.only(left: 10),
                                     child: TextFormField(
+                                      controller: passController,
                                       maxLines: 1,
                                       decoration: const InputDecoration(
                                         label: Text("Password"),
@@ -116,22 +121,32 @@ class LoginPage extends StatelessWidget {
                         const SizedBox(height: 20),
                         FadeAnimation(
                           2,
-                          Container(
-                            width: double.infinity,
-                            alignment: Alignment.center,
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 10),
-                            padding: const EdgeInsets.only(top: 10, bottom: 10),
-                            decoration: const BoxDecoration(
-                              color: Color(0xFF536DFE),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
-                            ),
-                            child: const Text(
-                              "Login",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
+                          GestureDetector(
+                            onTap: () {
+                              authController.signInWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passController.text,
+                                ctx: context,
+                              );
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 30, vertical: 10),
+                              padding:
+                                  const EdgeInsets.only(top: 10, bottom: 10),
+                              decoration: const BoxDecoration(
+                                color: Color(0xFF536DFE),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                              ),
+                              child: const Text(
+                                "Login",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
                               ),
                             ),
                           ),

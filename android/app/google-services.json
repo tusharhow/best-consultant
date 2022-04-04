@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1088230538277",
+    "project_id": "best-consultant",
+    "storage_bucket": "best-consultant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088230538277:android:60666f9ad8231561b9d3cc",
+        "android_client_info": {
+          "package_name": "com.example.best_consultant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088230538277-8b20md267g6a5jr1aprucg24ps2494t2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwJI2gHuDkT0jujcijA8BNkuT2lcq6Ews"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088230538277-8b20md267g6a5jr1aprucg24ps2494t2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
