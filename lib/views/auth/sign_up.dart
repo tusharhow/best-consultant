@@ -9,7 +9,12 @@ class SignUpPage extends StatelessWidget {
   AuthService fireAuth = AuthService();
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
+
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
+  TextEditingController countryController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -79,10 +84,45 @@ class SignUpPage extends StatelessWidget {
                                     child: Container(
                                       margin: const EdgeInsets.only(left: 10),
                                       child: TextFormField(
-                                        controller: nameController,
+                                        controller: firstNameController,
                                         maxLines: 1,
                                         decoration: const InputDecoration(
-                                          label: Text("Name"),
+                                          label: Text("First Name"),
+                                          border: InputBorder.none,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        FadeAnimation(
+                          2,
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 30, vertical: 10),
+                              padding: const EdgeInsets.only(left: 10),
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFdedbed),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12)),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const Icon(Icons.person_outline),
+                                  Expanded(
+                                    child: Container(
+                                      margin: const EdgeInsets.only(left: 10),
+                                      child: TextFormField(
+                                        controller: lastNameController,
+                                        maxLines: 1,
+                                        decoration: const InputDecoration(
+                                          label: Text("Last Name"),
                                           border: InputBorder.none,
                                         ),
                                       ),
@@ -157,15 +197,87 @@ class SignUpPage extends StatelessWidget {
                             ),
                           ),
                         ),
+                        FadeAnimation(
+                          2,
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 10),
+                            padding: const EdgeInsets.only(left: 10),
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFdedbed),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Icon(Icons.lock_outline),
+                                Expanded(
+                                  child: Container(
+                                    margin: const EdgeInsets.only(left: 10),
+                                    child: TextFormField(
+                                      controller: countryController,
+                                      maxLines: 1,
+                                      decoration: const InputDecoration(
+                                        label: Text("Country"),
+                                        border: InputBorder.none,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        FadeAnimation(
+                          2,
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 10),
+                            padding: const EdgeInsets.only(left: 10),
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFdedbed),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Icon(Icons.lock_outline),
+                                Expanded(
+                                  child: Container(
+                                    margin: const EdgeInsets.only(left: 10),
+                                    child: TextFormField(
+                                      controller: cityController,
+                                      maxLines: 1,
+                                      decoration: const InputDecoration(
+                                        label: Text("City"),
+                                        border: InputBorder.none,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                         const SizedBox(height: 20),
                         FadeAnimation(
                           2,
                           GestureDetector(
                             onTap: () async {
-                              fireAuth.signUpWithEmailAndPassword(
-                                  email: emailController.text,
-                                  password: passController.text,
-                                  name: nameController.text);
+                              // fireAuth.signUpWithEmailAndPassword(
+                              //     email: emailController.text,
+                              //     password: passController.text,
+                              //     name: nameController.text);
+                              fireAuth.saveUserData(
+                                email: emailController.text,
+                                firstName: firstNameController.text,
+                                lastName: lastNameController.text,
+                                city: cityController.text,
+                                country: countryController.text,
+                                password: passController.text,
+                              );
                             },
                             child: Container(
                               width: double.infinity,

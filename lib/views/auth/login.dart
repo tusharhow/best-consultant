@@ -124,7 +124,12 @@ class LoginPage extends StatelessWidget {
                           2,
                           GestureDetector(
                             onTap: () {
-                              authController.signInWithEmailAndPassword(
+                              // authController.signInWithEmailAndPassword(
+                              //   email: emailController.text,
+                              //   password: passController.text,
+                              //   ctx: context,
+                              // );
+                              authController.loginUser(
                                 email: emailController.text,
                                 password: passController.text,
                                 ctx: context,
