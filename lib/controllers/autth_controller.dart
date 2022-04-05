@@ -74,10 +74,21 @@ class AuthService {
     required ctx,
   }) async {
     try {
-      final authResult = await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
-      final user = authResult.user;
-      print("User signed in: ${user!.uid}");
+      final user = await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: email)
+          .get();
+      if (user.docs.isNotEmpty) {
+        final userData = user.docs[0].data();
+        if (userData['password'] == password) {
+          Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => HomePage()));
+        } else {
+          print('Password is incorrect');
+        }
+      } else {
+        print('User does not exist');
+      }
+      print("User signed in: ${user.docs[0].id}");
       Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => HomePage()));
     } catch (e) {
       print(e.toString());
