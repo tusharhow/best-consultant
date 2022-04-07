@@ -33,10 +33,11 @@ dependencies:
   firebase_core: ^1.14.0
   flutter:
     sdk: flutter
+  flutter_paypal: ^0.0.8
   http_auth: ^1.0.1
   shared_preferences: ^2.0.13
   simple_animations: ^4.0.1
-  webview_flutter: ^3.0.1
+  
 
 dev_dependencies:
   flutter_test:

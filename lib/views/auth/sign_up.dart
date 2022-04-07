@@ -1,21 +1,18 @@
 import 'package:best_consultant/controllers/autth_controller.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'login.dart';
 
+// ignore: must_be_immutable
 class SignUpPage extends StatelessWidget {
   SignUpPage({Key? key}) : super(key: key);
   AuthService fireAuth = AuthService();
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
-
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController cityController = TextEditingController();
   TextEditingController countryController = TextEditingController();
 
-  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -329,7 +326,10 @@ class SignUpPage extends StatelessWidget {
                               ),
                             ),
                           ],
-                        )
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
                       ],
                     ),
                   ),
