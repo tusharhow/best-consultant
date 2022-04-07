@@ -1,5 +1,6 @@
 import 'package:best_consultant/views/auth/login.dart';
 import 'package:best_consultant/views/auth/sign_up.dart';
+import 'package:best_consultant/views/chat_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: BottomChatBar(),
     );
   }
 }
