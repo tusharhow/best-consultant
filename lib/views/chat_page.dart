@@ -38,16 +38,7 @@ class _BottomChatBarState extends State<BottomChatBar> {
   Stream<QuerySnapshot> getMessages() {
     return FirebaseFirestore.instance
         .collection('messages')
-        .orderBy('createdAt', descending: true)
-        .limit(20)
-        .snapshots();
-  }
-
-  // get admin messages from firebase
-  Stream<QuerySnapshot> getAdminMessages() {
-    return FirebaseFirestore.instance
-        .collection('messages')
-        .orderBy('createdAt', descending: true)
+        .orderBy('createdAt', descending: false)
         .limit(20)
         .snapshots();
   }
@@ -55,34 +46,41 @@ class _BottomChatBarState extends State<BottomChatBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xff7161EF),
       body: Column(
         children: [
-          // show admin messages
-          Expanded(
-            child: StreamBuilder<QuerySnapshot>(
-              stream: getMessages(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    reverse: true,
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      final DocumentSnapshot doc = snapshot.data!.docs[index];
-                      return ListTile(
-                        title: Text(doc['reply']),
-                      );
-                    },
-                  );
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ),
-          ),
-          Expanded(
+          // design chat screen
+          // Spacer(),
+          // Expanded(
+          //   child: StreamBuilder<QuerySnapshot>(
+          //     stream: getMessages(),
+          //     builder: (context, snapshot) {
+          //       if (snapshot.hasData) {
+          //         return ListView.builder(
+          //           reverse: true,
+          //           itemCount: snapshot.data!.docs.length,
+          //           itemBuilder: (context, index) {
+          //             final DocumentSnapshot doc = snapshot.data!.docs[index];
+          //             return ListTile(
+          //               title: Text(doc['reply'],
+          //                   style: TextStyle(
+          //                     color: Colors.white,
+          //                     fontSize: 15,
+          //                   )),
+          //             );
+          //           },
+          //         );
+          //       } else {
+          //         return Center(
+          //           child: CircularProgressIndicator(),
+          //         );
+          //       }
+          //     },
+          //   ),
+          // ),
+          Spacer(),
+          SizedBox(
+            height: 400,
             child: StreamBuilder<QuerySnapshot>(
               stream: getMessages(),
               builder: (context, snapshot) {
@@ -96,21 +94,27 @@ class _BottomChatBarState extends State<BottomChatBar> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            // Text(
-                            //   doc['from'],
-                            //   style: TextStyle(
-                            //     fontSize: 16,
-                            //     color: Colors.black,
-                            //   ),
-                            // ),
-                            // SizedBox(
-                            //   width: 10,
-                            // ),
-                            Text(
-                              doc['text'],
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15.0),
+                              child: Text(
+                                doc['reply'],
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Spacer(),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15.0),
+                              child: Text(
+                                doc['text'],
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ],
@@ -127,84 +131,47 @@ class _BottomChatBarState extends State<BottomChatBar> {
             ),
           ),
 
+          Spacer(),
           SizedBox(
-            height: 250,
-          ),
-          Container(
-            height: 60,
-            decoration: BoxDecoration(
-              color: Color(0xff161616),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 10,
-                  offset: Offset(0, 5),
+            width: MediaQuery.of(context).size.width / 1.1,
+            height: 50,
+            child: TextField(
+              cursorColor: Colors.lightBlue,
+              controller: textController,
+              textAlign: TextAlign.left,
+              textAlignVertical: TextAlignVertical.center,
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+              ),
+              keyboardType: TextInputType.text,
+              onEditingComplete: sendMessage,
+              decoration: InputDecoration(
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.send, color: Colors.white),
+                  onPressed: () {
+                    sendMessage();
+                    // auto scroll to bottom of chat screen
+                  },
                 ),
-              ],
-            ),
-            child: Align(
-              alignment: Alignment.center,
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 15.0,
-                    ),
-                    constraints: const BoxConstraints(
-                      maxWidth: 275,
-                    ),
-                    child: TextField(
-                      cursorColor: Colors.lightBlue,
-                      controller: textController,
-                      textAlign: TextAlign.left,
-                      textAlignVertical: TextAlignVertical.center,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                      keyboardType: TextInputType.text,
-                      onEditingComplete: sendMessage,
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Color(0xff212121),
-                        border: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        labelStyle: TextStyle(
-                          color: Colors.white,
-                        ),
-                        labelText: 'Enter message',
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        contentPadding: EdgeInsets.only(
-                          left: 20.0,
-                          right: 10.0,
-                          top: 0.0,
-                          bottom: 0.0,
-                        ),
-                      ),
-                    ),
+                filled: true,
+                fillColor: Colors.black38,
+                border: InputBorder.none,
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
                   ),
-                  SizedBox(
-                    height: 45,
-                    width: 50,
-                    child: FloatingActionButton(
-                      onPressed: () {
-                        sendMessage();
-                      },
-                      elevation: 8.0,
-                      backgroundColor: Colors.lightBlue,
-                      child: const Center(
-                        child: Icon(
-                          Icons.send,
-                          size: 30.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                labelStyle: TextStyle(
+                  color: Colors.white,
+                ),
+                labelText: 'Enter message',
               ),
             ),
+          ),
+          SizedBox(
+            height: 20,
           ),
         ],
       ),
