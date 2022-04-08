@@ -49,35 +49,6 @@ class _BottomChatBarState extends State<BottomChatBar> {
       backgroundColor: Color(0xff7161EF),
       body: Column(
         children: [
-          // design chat screen
-          // Spacer(),
-          // Expanded(
-          //   child: StreamBuilder<QuerySnapshot>(
-          //     stream: getMessages(),
-          //     builder: (context, snapshot) {
-          //       if (snapshot.hasData) {
-          //         return ListView.builder(
-          //           reverse: true,
-          //           itemCount: snapshot.data!.docs.length,
-          //           itemBuilder: (context, index) {
-          //             final DocumentSnapshot doc = snapshot.data!.docs[index];
-          //             return ListTile(
-          //               title: Text(doc['reply'],
-          //                   style: TextStyle(
-          //                     color: Colors.white,
-          //                     fontSize: 15,
-          //                   )),
-          //             );
-          //           },
-          //         );
-          //       } else {
-          //         return Center(
-          //           child: CircularProgressIndicator(),
-          //         );
-          //       }
-          //     },
-          //   ),
-          // ),
           Spacer(),
           SizedBox(
             height: 400,
@@ -130,7 +101,6 @@ class _BottomChatBarState extends State<BottomChatBar> {
               },
             ),
           ),
-
           Spacer(),
           SizedBox(
             width: MediaQuery.of(context).size.width / 1.1,
