@@ -29,6 +29,10 @@ class _BottomChatBarState extends State<BottomChatBar> {
         'from': "tmah@gmail.com",
         "reply": "",
         'createdAt': Timestamp.now(),
+        'reciver':
+            "https://images.unsplash.com/photo-1574701148212-8518049c7b2c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8YmVhdXRpZnVsJTIwd29tYW58ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+        'sender':
+            "https://images.unsplash.com/photo-1597248374161-426f0d6d2fc9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
       });
       textController.clear();
     }
@@ -65,14 +69,36 @@ class _BottomChatBarState extends State<BottomChatBar> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
+                            ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  doc['sender'],
+                                  height: 40,
+                                  width: 40,
+                                  fit: BoxFit.cover,
+                                )),
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 15.0),
-                              child: Text(
-                                doc['reply'],
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
+                              child: Container(
+                                height: doc['text'].length > 20
+                                    ? 40
+                                    : doc['text'].length > 10
+                                        ? 30
+                                        : 30,
+                                width: doc['text'].length > 20
+                                    ? 200
+                                    : doc['text'].length > 10
+                                        ? 150
+                                        : 100,
+                                child: Text(
+                                  doc['reply'] == ""
+                                      ? "typing.."
+                                      : doc['reply'],
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
@@ -80,14 +106,40 @@ class _BottomChatBarState extends State<BottomChatBar> {
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 15.0),
-                              child: Text(
-                                doc['text'],
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.white,
+                              child: Container(
+                                height: doc['text'].length > 20
+                                    ? 40
+                                    : doc['text'].length > 10
+                                        ? 30
+                                        : 30,
+                                width: doc['text'].length > 20
+                                    ? 200
+                                    : doc['text'].length > 10
+                                        ? 150
+                                        : 100,
+                                decoration: BoxDecoration(
+                                  color: Color(0xffF6C54D),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    doc['text'],
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
+                            ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  doc['reciver'],
+                                  height: 40,
+                                  width: 40,
+                                  fit: BoxFit.cover,
+                                )),
                           ],
                         ),
                       );
