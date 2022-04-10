@@ -1,5 +1,6 @@
 import 'package:best_consultant/controllers/autth_controller.dart';
 import 'package:flutter/material.dart';
+import '../home_page.dart';
 import 'login.dart';
 
 // ignore: must_be_immutable
@@ -267,14 +268,19 @@ class SignUpPage extends StatelessWidget {
                               //     email: emailController.text,
                               //     password: passController.text,
                               //     name: nameController.text);
-                              fireAuth.saveUserData(
-                                email: emailController.text,
-                                firstName: firstNameController.text,
-                                lastName: lastNameController.text,
-                                city: cityController.text,
-                                country: countryController.text,
-                                password: passController.text,
-                              );
+                              fireAuth
+                                  .saveUserData(
+                                    email: emailController.text,
+                                    firstName: firstNameController.text,
+                                    lastName: lastNameController.text,
+                                    city: cityController.text,
+                                    country: countryController.text,
+                                    password: passController.text,
+                                  )
+                                  .then((value) => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginPage())));
                             },
                             child: Container(
                               width: double.infinity,
