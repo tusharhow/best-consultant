@@ -80,7 +80,7 @@ class AuthService {
           .get();
       if (user.docs.isNotEmpty) {
         final userData = user.docs[0].data();
-        if (userData['password'] == password) {
+        if (userData['password'] == password && userData['email'] == email) {
           Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => HomePage()));
         } else {
           print('Password is incorrect');
@@ -89,7 +89,7 @@ class AuthService {
         print('User does not exist');
       }
       print("User signed in: ${user.docs[0].id}");
-      Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => HomePage()));
+      // Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => HomePage()));
     } catch (e) {
       print(e.toString());
     }
